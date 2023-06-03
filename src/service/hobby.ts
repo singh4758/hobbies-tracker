@@ -15,7 +15,7 @@ export class HobbyService implements IHobbyService {
 
     const { userId } = hobby;
 
-    const user = this.userService.findUser(userId);
+    const user = await this.userService.findUser(userId);
 
     if(!user) {
       throw "user not exist";
@@ -25,7 +25,7 @@ export class HobbyService implements IHobbyService {
   }
 
   async removeHobby(id: ObjectId): Promise<void> {
-    const hobby = this.hobbyRepository.findHobby(id);
+    const hobby = await this.hobbyRepository.findHobby(id);
 
     if(!hobby) {
       throw "hobby not exist";
