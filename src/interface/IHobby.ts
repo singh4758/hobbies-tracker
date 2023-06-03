@@ -8,7 +8,7 @@ enum passionLevel {
 }
 
 export interface IHobby {
-  _id: ObjectId;
+  _id?: ObjectId;
   passionLevel: passionLevel;
   hobbyName: string;
   year: string;

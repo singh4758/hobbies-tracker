@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb';
 import { IHobby } from './IHobby';
 
 export interface IUser {
-  _id: ObjectId;
+  _id?: ObjectId;
   name: string;
 }
 
