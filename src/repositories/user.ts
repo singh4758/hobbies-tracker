@@ -1,5 +1,5 @@
 import { Db, Collection, AggregationCursor, ObjectId } from 'mongodb';
-import { IUser, IUserRepository } from '../interface/IUser';
+import { IUser, IUserRepository } from '../interface/user';
 
 export class UserRepository implements IUserRepository {
   private collection: Collection<IUser>;

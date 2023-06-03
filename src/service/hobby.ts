@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
-import { IHobbyService, IHobbyRepository, IHobby } from "../interface/IHobby";
-import { IUserService } from "../interface/IUser";
+import { IHobbyService, IHobbyRepository, IHobby } from "../interface/hobby";
+import { IUserService } from "../interface/user";
 
 export class HobbyService implements IHobbyService {
   private hobbyRepository: IHobbyRepository;

@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { IUser, IUserRepository, IUserService, IUserWithHobbies } from "../interface/IUser";
+import { IUser, IUserRepository, IUserService, IUserWithHobbies } from "../interface/user";
 
 export class UserService implements IUserService {
   private userRepository: IUserRepository;

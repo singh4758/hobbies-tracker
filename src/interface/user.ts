@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb';
-import { IHobby } from './IHobby';
+import { IHobby } from './hobby';
 
 export interface IUser {
   _id?: ObjectId;

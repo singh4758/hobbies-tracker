@@ -1,5 +1,5 @@
 import { Db, Collection, ObjectId } from 'mongodb';
-import { IHobby, IHobbyRepository } from "../interface/IHobby";
+import { IHobby, IHobbyRepository } from "../interface/hobby";
 
 export class HobbyRepository implements IHobbyRepository {
   private collection: Collection<IHobby>;
