@@ -13,7 +13,7 @@ export class HobbyRoutes {
 
   private initializeRoutes(): void {
     this.router.post('/', this.controller.addHobby.bind(this.controller));
-    this.router.delete('/', this.controller.removeHobby.bind(this.controller));
+    this.router.delete('/:id', this.controller.removeHobby.bind(this.controller));
   }
 
   public getRouter(): Router {

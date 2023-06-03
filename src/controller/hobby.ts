@@ -24,7 +24,7 @@ export class HobbyController {
 
   async removeHobby(req: Request, res: Response): Promise<void> {
     try {
-      const { id } = req.query;
+      const { id } = req.params;
 
       await this.service.removeHobby(new ObjectId(String(id)));
       res.json({ message: "hobby remove successfully"});
