@@ -1,5 +1,7 @@
 import express, { Router } from 'express';
 import { UserController } from '../controller/user';
+import { validateRequest } from '../middleware/validateRequest';
+import { getUsers, userPostSchema } from '../reqBodySchema/user/user';
 
 export class UserRoutes {
   private readonly router: Router;
@@ -12,8 +14,8 @@ export class UserRoutes {
   }
 
   private initializeRoutes(): void {
-    this.router.get('/', this.controller.getAllUsersWithHobbies.bind(this.controller));
-    this.router.post('/', this.controller.addUser.bind(this.controller));
+    this.router.get('/', validateRequest(getUsers, 'query'), this.controller.getAllUsersWithHobbies.bind(this.controller));
+    this.router.post('/', validateRequest(userPostSchema, 'body'), this.controller.addUser.bind(this.controller));
   }
 
   public getRouter(): Router {
