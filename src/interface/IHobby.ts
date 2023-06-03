@@ -19,3 +19,8 @@ export interface IHobbyRepository {
   addHobby(hobby: IHobby): Promise<void>;
   removeHobby(id: string): Promise<void> 
 }
+
+export interface IHobbyService {
+  addHobby(hobby: IHobby): Promise<void>;
+  removeHobby(id: string): Promise<void> 
+}
