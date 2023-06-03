@@ -5,6 +5,6 @@ export const userPostSchema = Joi.object({
 });
 
 export const getUsers = Joi.object({
-  limit: Joi.string(),
+  limit: Joi.number(),
   skip: Joi.number()
 });
