@@ -4,7 +4,7 @@ export interface IHobby {
   _id?: ObjectId;
   passionLevel: string;
   hobbyName: string;
-  year: string;
+  year: number;
   userId: ObjectId;
 }
 

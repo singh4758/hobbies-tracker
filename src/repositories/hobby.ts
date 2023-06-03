@@ -1,21 +1,22 @@
 import { Db, Collection, ObjectId } from 'mongodb';
 import { IHobby, IHobbyRepository } from "../interface/hobby";
+import { HobbyModel } from '../models/hobby';
 
 export class HobbyRepository implements IHobbyRepository {
-  private collection: Collection<IHobby>;
+  private hobbyModel: typeof HobbyModel;
 
-  constructor(db: Db) {
-    this.collection = db.collection('hobbies');
+  constructor(userModel: typeof HobbyModel) {
+    this.hobbyModel = userModel;
   }
   findHobby(id: ObjectId): Promise<IHobby | null> {
-    return this.collection.findOne({ _id: id });
+    return this.hobbyModel.findOne({ _id: id });
   }
 
   async addHobby(hobby: IHobby): Promise<void> {
-    await this.collection.insertOne(hobby);
+    await this.hobbyModel.create(hobby);
   }
 
   async removeHobby(id: ObjectId): Promise<void> {
-    await this.collection.deleteOne({ _id: id });
+    await this.hobbyModel.deleteOne({ _id: id });
   }
 }

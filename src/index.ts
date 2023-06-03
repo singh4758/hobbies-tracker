@@ -1,5 +1,5 @@
 import express from 'express';
-import { MongoClient, Db } from 'mongodb';
+import mongoose from 'mongoose';
 import 'dotenv/config'
 import { HobbyController } from './controller/hobby';
 import { UserController } from './controller/user';
@@ -9,20 +9,21 @@ import { HobbyRoutes } from './routes/hobby';
 import { UserRoutes } from './routes/user';
 import { HobbyService } from './service/hobby';
 import { UserService } from './service/user';
+import { UserModel } from './models/user';
+import { HobbyModel } from './models/hobby';
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 async function startServer(): Promise<void> {
   try {
-    const client = await MongoClient.connect(process.env.MONGO_URL as string);
-    const db: Db = client.db(process.env.DATABASE_NAME as string);
-    const userRepository = new UserRepository(db);
+    await mongoose.connect(process.env.MONGO_URL as string)
+    const userRepository = new UserRepository(UserModel);
     const userService = new UserService(userRepository);
     const userController = new UserController(userService);
     const userRoutes = new UserRoutes(userController);
 
-    const hobbyRepository = new HobbyRepository(db);
+    const hobbyRepository = new HobbyRepository(HobbyModel);
     const hobbyService = new HobbyService(hobbyRepository, userService);
     const hobbyController = new HobbyController(hobbyService);
     const hobbyRoutes = new HobbyRoutes(hobbyController);

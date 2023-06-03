@@ -1,23 +1,24 @@
 import { Db, Collection, AggregationCursor, ObjectId } from 'mongodb';
+import { UserModel } from '../models/user';
 import { IUser, IUserRepository } from '../interface/user';
 
 export class UserRepository implements IUserRepository {
-  private collection: Collection<IUser>;
 
-  constructor(db: Db) {
-    this.collection = db.collection('users');
+  private userModel: typeof UserModel;
+
+  constructor(userModel: typeof UserModel) {
+    this.userModel = userModel;
   }
-
   async aggregate<T>(pipeline: any[]): Promise<T[]> {
-    const cursor = this.collection.aggregate(pipeline) as AggregationCursor<T>;
-    return cursor.toArray();
+    const users = this.userModel.aggregate<T>(pipeline);
+    return users;
   }
 
   async addUser(user: IUser): Promise<void> {
-    await this.collection.insertOne(user);
+    await this.userModel.create(user);
   }
 
   async findUser(id: ObjectId): Promise<IUser | null> {
-      return this.collection.findOne({ _id: id });
+      return this.userModel.findOne({ _id: id });
   }
 }
