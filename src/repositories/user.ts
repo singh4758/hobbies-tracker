@@ -1,4 +1,4 @@
-import { Db, Collection, AggregationCursor, Document } from 'mongodb';
+import { Db, Collection, AggregationCursor } from 'mongodb';
 import { IUser, IUserRepository } from '../interface/IUser';
 
 export class UserRepository implements IUserRepository {
