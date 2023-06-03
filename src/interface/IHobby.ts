@@ -12,5 +12,10 @@ export interface IHobby {
   passionLevel: passionLevel;
   hobbyName: string;
   year: string;
-  userId: string;
+  userId: ObjectId;
+}
+
+export interface IHobbyRepository {
+  addHobby(hobby: IHobby): Promise<void>;
+  removeHobby(id: string): Promise<void> 
 }
