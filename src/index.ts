@@ -17,7 +17,7 @@ const port = process.env.PORT || 3000;
 
 async function startServer(): Promise<void> {
   try {
-    await mongoose.connect(process.env.MONGO_URL as string)
+    await mongoose.connect(`${process.env.MONGO_URL}/${process.env.DATABASE_NAME}` as string)
     const userRepository = new UserRepository(UserModel);
     const userService = new UserService(userRepository);
     const userController = new UserController(userService);
