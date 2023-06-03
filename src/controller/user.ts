@@ -10,7 +10,8 @@ export class UserController {
 
   async getAllUsersWithHobbies(req: Request, res: Response): Promise<void> {
     try {
-      const users = await this.service.getUsersWithHobbies();
+      const { limit = 10, skip = 0 } = req.params;
+      const users = await this.service.getUsersWithHobbies(Number(skip), Number(limit));
       res.json(users);
     } catch (error) {
       console.error(error);

@@ -17,7 +17,7 @@ export interface IUserRepository {
 }
 
 export interface IUserService {
-  getUsersWithHobbies(): Promise<IUserWithHobbies[]>;
+  getUsersWithHobbies(skip: number, limit: number): Promise<IUserWithHobbies[]>;
   addUser(user: IUser): Promise<void>;
   findUser(id: ObjectId): Promise<IUser | null>;
 }

@@ -12,7 +12,7 @@ export class UserService implements IUserService {
     return this.userRepository.findUser(id);;
   }
 
-  async getUsersWithHobbies(): Promise<IUserWithHobbies[]> {
+  async getUsersWithHobbies(skip: number, limit: number): Promise<IUserWithHobbies[]> {
 
     const pipeline = [
       {
@@ -23,9 +23,9 @@ export class UserService implements IUserService {
           'as': 'hobbies'
         }
       }, {
-        '$skip': 10
+        '$skip': skip
       }, {
-        '$limit': 10
+        '$limit': limit
       }
     ]
 
