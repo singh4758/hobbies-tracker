@@ -17,10 +17,11 @@ export interface IHobby {
 
 export interface IHobbyRepository {
   addHobby(hobby: IHobby): Promise<void>;
-  removeHobby(id: string): Promise<void> 
+  removeHobby(id: ObjectId): Promise<void> ;
+  findHobby(id: ObjectId): Promise<IHobby | null>
 }
 
 export interface IHobbyService {
   addHobby(hobby: IHobby): Promise<void>;
-  removeHobby(id: string): Promise<void> 
+  removeHobby(id: ObjectId): Promise<void> 
 }

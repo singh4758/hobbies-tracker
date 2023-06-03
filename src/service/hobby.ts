@@ -1,17 +1,36 @@
+import { ObjectId } from "mongodb";
 import { IHobbyService, IHobbyRepository, IHobby } from "../interface/IHobby";
+import { IUserService } from "../interface/IUser";
 
 export class HobbyService implements IHobbyService {
   private hobbyRepository: IHobbyRepository;
+  private userService: IUserService;
 
-  constructor(hobbyRepository: IHobbyRepository) {
+  constructor(hobbyRepository: IHobbyRepository, userService: IUserService) {
     this.hobbyRepository = hobbyRepository;
+    this.userService = userService;
   }
 
   async addHobby(hobby: IHobby): Promise<void> {
+
+    const { userId } = hobby;
+
+    const user = this.userService.findUser(userId);
+
+    if(!user) {
+      throw "user not exist";
+    }
+
     await this.hobbyRepository.addHobby(hobby);
   }
 
-  async removeHobby(id: string): Promise<void> {
+  async removeHobby(id: ObjectId): Promise<void> {
+    const hobby = this.hobbyRepository.findHobby(id);
+
+    if(!hobby) {
+      throw "hobby not exist";
+    }
+
     await this.hobbyRepository.removeHobby(id);
   }
 }

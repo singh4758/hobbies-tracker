@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { IUser, IUserRepository, IUserService, IUserWithHobbies } from "../interface/IUser";
 
 export class UserService implements IUserService {
@@ -5,6 +6,10 @@ export class UserService implements IUserService {
 
   constructor(userRepository: IUserRepository) {
     this.userRepository = userRepository;
+  }
+
+  findUser(id: ObjectId): Promise<IUser | null> {
+    return this.userRepository.findUser(id);;
   }
 
   async getUsersWithHobbies(): Promise<IUserWithHobbies[]> {
@@ -27,6 +32,6 @@ export class UserService implements IUserService {
     return this.userRepository.aggregate<IUserWithHobbies>(pipeline);
   }
   addUser(user: IUser): Promise<void> {
-    return this.userRepository.addUser(user);;
+    return this.userRepository.addUser(user);
   }
 }

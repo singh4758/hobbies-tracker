@@ -7,12 +7,15 @@ export class HobbyRepository implements IHobbyRepository {
   constructor(db: Db) {
     this.collection = db.collection('hobbies');
   }
+  findHobby(id: ObjectId): Promise<IHobby | null> {
+    return this.collection.findOne({ _id: id });
+  }
 
   async addHobby(hobby: IHobby): Promise<void> {
     await this.collection.insertOne(hobby);
   }
 
-  async removeHobby(id: string): Promise<void> {
-    await this.collection.deleteOne({ _id: new ObjectId(id) });
+  async removeHobby(id: ObjectId): Promise<void> {
+    await this.collection.deleteOne({ _id: id });
   }
 }

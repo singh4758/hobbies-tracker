@@ -1,4 +1,4 @@
-import { Db, Collection, AggregationCursor } from 'mongodb';
+import { Db, Collection, AggregationCursor, ObjectId } from 'mongodb';
 import { IUser, IUserRepository } from '../interface/IUser';
 
 export class UserRepository implements IUserRepository {
@@ -15,5 +15,9 @@ export class UserRepository implements IUserRepository {
 
   async addUser(user: IUser): Promise<void> {
     await this.collection.insertOne(user);
+  }
+
+  async findUser(id: ObjectId): Promise<IUser | null> {
+      return this.collection.findOne({ _id: id });
   }
 }
