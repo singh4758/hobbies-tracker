@@ -11,6 +11,11 @@ export interface IUserWithHobbies extends IUser {
 }
 
 export interface IUserRepository {
-  aggregation<T extends Document>(aggregationPipeline: any[]): Promise<T[]>;
+  aggregate<T>(aggregationPipeline: any[]): Promise<T[]>;
+  addUser(user: IUser): Promise<void>;
+}
+
+export interface IUserService {
+  getUsersWithHobbies(): Promise<IUserWithHobbies[]>;
   addUser(user: IUser): Promise<void>;
 }

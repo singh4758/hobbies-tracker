@@ -1,5 +1,5 @@
-import { Db, Collection, ObjectId } from 'mongodb';
-import { IUser, IUserRepository, IUserWithHobbies } from '../interface/IUser';
+import { Db, Collection, AggregationCursor, Document } from 'mongodb';
+import { IUser, IUserRepository } from '../interface/IUser';
 
 export class UserRepository implements IUserRepository {
   private collection: Collection<IUser>;
@@ -7,10 +7,10 @@ export class UserRepository implements IUserRepository {
   constructor(db: Db) {
     this.collection = db.collection('users');
   }
-  async aggregation<T extends Document>(aggregationPipeline: any[]): Promise<T[]> {
-    let docs =  this.collection.aggregate<T>(aggregationPipeline)
 
-    return docs.toArray();
+  async aggregate<T>(pipeline: any[]): Promise<T[]> {
+    const cursor = this.collection.aggregate(pipeline) as AggregationCursor<T>;
+    return cursor.toArray();
   }
 
   async addUser(user: IUser): Promise<void> {
