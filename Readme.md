@@ -15,6 +15,9 @@ This API allows you to add users and its hobbies
     cd <folder-name>
     npm install
     ```
+3. Add .env file:
+
+    Key example is in env.example file. Please add key and value accordingly
 
 ## Usage
 
