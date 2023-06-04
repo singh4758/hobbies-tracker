@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import 'dotenv/config'
 import { HobbyController } from './controller/hobby';
@@ -11,6 +11,7 @@ import { HobbyService } from './service/hobby';
 import { UserService } from './service/user';
 import { UserModel } from './models/user';
 import { HobbyModel } from './models/hobby';
+import { setupSwagger } from './libs/swagger';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -31,6 +32,12 @@ async function startServer(): Promise<void> {
     app.use(express.json());
     app.use('/users', userRoutes.getRouter());
     app.use('/hobbies', hobbyRoutes.getRouter());
+
+    setupSwagger(app);
+
+    app.use((req: Request, res: Response) => {
+      res.status(404).send('Not Found');
+    });
 
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);
