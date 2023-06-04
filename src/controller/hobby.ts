@@ -16,9 +16,13 @@ export class HobbyController {
 
       await this.service.addHobby(hobby);
       res.json({ message: "hobby added successfully"});
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      res.status(500).send('Internal Server Error');
+      if (error?.message) {
+        res.status(404).send({message: error.message});
+      } else {
+        res.status(500).send('Internal Server Error');
+      }
     }
   }
 
@@ -28,9 +32,13 @@ export class HobbyController {
 
       await this.service.removeHobby(new ObjectId(String(id)));
       res.json({ message: "hobby remove successfully"});
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      res.status(500).send('Internal Server Error');
+      if (error?.message) {
+        res.status(404).send({message: error.message});
+      } else {
+        res.status(500).send('Internal Server Error');
+      }
     }
   }
 
