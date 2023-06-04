@@ -18,8 +18,8 @@ export class HobbyController {
       res.json({ message: "hobby added successfully"});
     } catch (error: any) {
       console.error(error);
-      if (error?.message) {
-        res.status(404).send({message: error.message});
+      if (error?.status === 404) {
+        res.status(error.status).send({message: error.message});
       } else {
         res.status(500).send('Internal Server Error');
       }
@@ -34,8 +34,8 @@ export class HobbyController {
       res.json({ message: "hobby remove successfully"});
     } catch (error: any) {
       console.error(error);
-      if (error?.message) {
-        res.status(404).send({message: error.message});
+      if (error?.status === 404) {
+        res.status(error.status).send({message: error.message});
       } else {
         res.status(500).send('Internal Server Error');
       }
